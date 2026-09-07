@@ -17,7 +17,9 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: process.env.NODE_ENV === 'production'
+    ? process.env.CLIENT_URL
+    : ['http://localhost:5173', 'http://localhost:3000'],
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -37,6 +39,15 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Serve React build in production
+if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(__dirname, '../../client/dist');
+  app.use(express.static(clientDist));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientDist, 'index.html'));
+  });
+}
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).json({
@@ -45,9 +56,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: 'Route not found' });
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.use((req, res) => {
+    res.status(404).json({ success: false, message: 'Route not found' });
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
