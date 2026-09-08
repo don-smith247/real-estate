@@ -110,14 +110,7 @@ export default function Home() {
                 onMouseEnter={e => { e.currentTarget.style.borderColor = '#059669'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(5,150,105,0.12)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = '#D0DBD3'; e.currentTarget.style.boxShadow = ''; e.currentTarget.style.transform = ''; }}
               >
-                <div style={{
-                  width: 40, height: 40, borderRadius: '50%', flexShrink: 0,
-                  background: 'rgba(5,150,105,0.1)', border: '1.5px solid rgba(5,150,105,0.25)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '1rem', fontWeight: 700, color: '#059669',
-                }}>
-                  {state.name[0]}
-                </div>
+                <span style={{ fontSize: '1.75rem', lineHeight: 1, flexShrink: 0 }}>🇺🇸</span>
                 <div>
                   <div style={{ fontSize: '0.875rem', fontWeight: 600, color: '#0B1A12' }}>{state.name}</div>
                   <div style={{ fontSize: '0.75rem', color: '#6B8872', marginTop: '2px' }}>{state.city}</div>

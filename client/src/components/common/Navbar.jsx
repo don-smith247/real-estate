@@ -125,7 +125,7 @@ export default function Navbar() {
           </form>
 
           {/* Right Actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0, marginLeft: 'auto' }}>
             {NAV_LINKS.map(link => (
               <Link
                 key={link.href}

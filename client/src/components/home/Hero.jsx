@@ -1,231 +1,201 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, ChevronDown, MapPin } from 'lucide-react';
+import { Search, MapPin, ChevronDown, Shield, Star, Clock } from 'lucide-react';
 
-const HERO_IMAGES = [
-  'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&h=1080&q=80',
-  'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1920&h=1080&q=80',
-  'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1920&h=1080&q=80',
-];
-
-const QUICK_SEARCHES = [
-  { label: 'Washington DC', icon: MapPin },
-  { label: 'New York', icon: MapPin },
-  { label: 'Atlanta', icon: MapPin },
-  { label: 'Houston', icon: MapPin },
+const SLIDES = [
+  {
+    img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&h=1080&q=80',
+    city: 'Washington, DC',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1920&h=1080&q=80',
+    city: 'New York, NY',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1920&h=1080&q=80',
+    city: 'Atlanta, GA',
+  },
 ];
 
 const STATS = [
-  { value: '500+', label: 'Premium Listings' },
-  { value: '15yrs', label: 'Trusted Expertise' },
-  { value: '98%', label: 'Client Satisfaction' },
+  { value: '500+', label: 'Active Listings' },
+  { value: '98%', label: 'Satisfaction Rate' },
+  { value: '15 yrs', label: 'Experience' },
   { value: '30+', label: 'States Covered' },
+];
+
+const BADGES = [
+  { icon: Shield, text: 'Verified Properties' },
+  { icon: Star,   text: 'Top Rated Agency' },
+  { icon: Clock,  text: '24hr Response Time' },
 ];
 
 export default function Hero() {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [type, setType] = useState('');
-  const [imgIndex, setImgIndex] = useState(0);
+  const [slideIdx, setSlideIdx] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setImgIndex(i => (i + 1) % HERO_IMAGES.length), 6000);
-    return () => clearInterval(timer);
+    const t = setInterval(() => setSlideIdx(i => (i + 1) % SLIDES.length), 5000);
+    return () => clearInterval(t);
   }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const params = new URLSearchParams();
-    if (search) params.set('search', search);
-    if (type) params.set('type', type);
-    navigate(`/apartments?${params.toString()}`);
+    const p = new URLSearchParams();
+    if (search) p.set('search', search);
+    if (type)   p.set('type', type);
+    navigate(`/apartments?${p.toString()}`);
   };
 
   return (
-    <section style={{
-      position: 'relative',
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      overflow: 'hidden',
-      background: '#0B1A12',
-    }}>
-      {/* Background Images */}
-      {HERO_IMAGES.map((img, i) => (
-        <div
-          key={i}
-          style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: `url(${img})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: i === imgIndex ? 0.42 : 0,
-            transition: 'opacity 1.5s ease',
-            transform: 'scale(1.05)',
-          }}
-        />
+    <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#050E08' }}>
+
+      {/* Slide images */}
+      {SLIDES.map((s, i) => (
+        <div key={i} style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: `url(${s.img})`,
+          backgroundSize: 'cover', backgroundPosition: 'center',
+          opacity: i === slideIdx ? 0.5 : 0,
+          transition: 'opacity 1.8s ease',
+        }} />
       ))}
 
-      {/* Gradient Overlay */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(135deg, rgba(11,26,18,0.88) 0%, rgba(11,26,18,0.55) 50%, rgba(11,26,18,0.80) 100%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
-        background: 'linear-gradient(to top, #0B1A12 0%, transparent 100%)',
-        pointerEvents: 'none',
-      }} />
+      {/* Overlays */}
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,14,8,0.7) 0%, rgba(5,14,8,0.35) 40%, rgba(5,14,8,0.75) 100%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(5,14,8,0.6) 0%, transparent 60%)', pointerEvents: 'none' }} />
 
-      {/* Emerald accent line at top */}
-      <div style={{
-        position: 'absolute', top: 0, left: '10%', right: '10%', height: '2px',
-        background: 'linear-gradient(to right, transparent, #059669, transparent)',
-        opacity: 0.7,
-      }} />
+      {/* Emerald top line */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(to right, #059669, #34D399, #059669)' }} />
 
-      {/* Content */}
-      <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center', paddingTop: 'var(--header-h)' }}>
+      {/* Slide city label (bottom-right) */}
+      <motion.div
+        key={slideIdx}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.6 }}
+        style={{
+          position: 'absolute', bottom: 32, right: 32, zIndex: 3,
+          display: 'flex', alignItems: 'center', gap: 6,
+          background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255,255,255,0.12)',
+          borderRadius: 40, padding: '6px 14px',
+        }}
+        className="hero-city-badge"
+      >
+        <MapPin size={12} style={{ color: '#34D399' }} />
+        <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>{SLIDES[slideIdx].city}</span>
+      </motion.div>
 
-        {/* Logo */}
+      {/* Slide dots */}
+      <div style={{ position: 'absolute', bottom: 36, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6, zIndex: 3 }} className="hero-dots">
+        {SLIDES.map((_, i) => (
+          <button key={i} onClick={() => setSlideIdx(i)} style={{
+            width: i === slideIdx ? 24 : 6, height: 6,
+            borderRadius: 3, border: 'none', cursor: 'pointer',
+            background: i === slideIdx ? '#059669' : 'rgba(255,255,255,0.3)',
+            transition: 'all 0.3s ease', padding: 0,
+          }} />
+        ))}
+      </div>
+
+      {/* Main content */}
+      <div className="container" style={{ position: 'relative', zIndex: 2, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: 'calc(var(--header-h) + 40px)', paddingBottom: 100 }}>
+
+        {/* Trust badges */}
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="hero-logo"
-          style={{ marginBottom: 'var(--s-6)', display: 'flex', justifyContent: 'center' }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 28 }}
+          className="hero-badges"
         >
-          <img
-            src="/logo.PNG"
-            alt="Rotex One Realty"
-            style={{ height: 64, width: 'auto', objectFit: 'contain' }}
-            onError={e => { e.currentTarget.style.display = 'none'; }}
-          />
+          {BADGES.map(b => {
+            const Icon = b.icon;
+            return (
+              <div key={b.text} style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                background: 'rgba(5,150,105,0.12)', border: '1px solid rgba(5,150,105,0.25)',
+                borderRadius: 40, padding: '5px 12px',
+              }}>
+                <Icon size={12} style={{ color: '#34D399' }} />
+                <span style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.8)', fontWeight: 500, whiteSpace: 'nowrap' }}>{b.text}</span>
+              </div>
+            );
+          })}
         </motion.div>
 
-        {/* Pre-heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--s-3)', marginBottom: 'var(--s-5)' }}
-        >
-          <div style={{ width: '2rem', height: '1px', background: '#059669' }} />
-          <span style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#059669' }}>
-            United States | Nationwide Rental Properties
-          </span>
-          <div style={{ width: '2rem', height: '1px', background: '#059669' }} />
-        </motion.div>
-
-        {/* Main Heading */}
+        {/* Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="display-xl"
-          style={{
-            color: 'var(--white)',
-            maxWidth: 900,
-            margin: '0 auto var(--s-5)',
-          }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          style={{ color: '#fff', maxWidth: 720, marginBottom: 16, lineHeight: 1.1 }}
+          className="hero-heading"
         >
-          Live Where Excellence
+          Find Premium Rentals
           <br />
-          <span style={{ color: '#059669', display: 'inline-block' }}>Is The Standard</span>
+          <span style={{ color: '#34D399' }}>Across America</span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="hero-subtitle"
-          style={{
-            fontSize: '1.125rem',
-            color: 'rgba(255,255,255,0.65)',
-            maxWidth: 580,
-            margin: '0 auto var(--s-10)',
-            lineHeight: 1.7,
-            fontWeight: 300,
-          }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          style={{ fontSize: '1.0625rem', color: 'rgba(255,255,255,0.6)', maxWidth: 520, lineHeight: 1.7, marginBottom: 36 }}
+          className="hero-sub"
         >
-          Rotex One Realty connects clients with premium rental residences across the United States. Headquartered in Washington DC with offices in major cities nationwide.
+          Rotex One Realty connects you with verified, premium apartments in Washington DC and major cities nationwide. Trusted by thousands of renters.
         </motion.p>
 
-        {/* Search Form */}
+        {/* Search card */}
         <motion.div
-          initial={{ opacity: 0, y: 24, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          style={{ maxWidth: 700, margin: '0 auto var(--s-6)' }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          style={{
+            background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 20, padding: 8,
+            maxWidth: 660, boxShadow: '0 32px 80px rgba(0,0,0,0.5)',
+          }}
+          className="hero-search-card"
         >
           <form onSubmit={handleSearch}>
-            <div className="hero-search-bar" style={{
-              display: 'flex',
-              gap: 0,
-              background: 'rgba(255,255,255,0.04)',
-              backdropFilter: 'blur(24px)',
-              border: '1.5px solid rgba(255,255,255,0.1)',
-              borderRadius: 'var(--r-2xl)',
-              overflow: 'hidden',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.4)',
-            }}>
-              {/* Search Input */}
-              <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center' }}>
-                <Search size={18} style={{ position: 'absolute', left: 'var(--s-5)', color: 'rgba(255,255,255,0.4)' }} />
+            <div className="hero-form-row" style={{ display: 'flex', gap: 6 }}>
+
+              {/* Location input */}
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 10, background: 'rgba(255,255,255,0.06)', borderRadius: 12, padding: '0 16px', minWidth: 0 }}>
+                <Search size={16} style={{ color: 'rgba(255,255,255,0.4)', flexShrink: 0 }} />
                 <input
                   type="text"
-                  placeholder="City, neighborhood, or state..."
+                  placeholder="City, state or neighborhood..."
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                   style={{
-                    flex: 1, padding: 'var(--s-5) var(--s-5) var(--s-5) calc(var(--s-5) + 28px)',
-                    background: 'transparent',
-                    border: 'none',
-                    color: 'var(--white)',
-                    fontSize: '0.9375rem',
-                    outline: 'none',
+                    flex: 1, border: 'none', outline: 'none', background: 'transparent',
+                    color: '#fff', fontSize: '0.9375rem', fontFamily: 'inherit',
+                    padding: '14px 0',
                   }}
                 />
-                <style>{`
-                  input::placeholder { color: rgba(255,255,255,0.4); }
-                  @media (max-width: 640px) {
-                    .hero-search-bar { flex-direction: column !important; border-radius: 16px !important; }
-                    .hero-search-bar > div { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.08); }
-                    .hero-search-btn { border-radius: 0 0 14px 14px !important; padding: 14px !important; justify-content: center; }
-                    .hero-quick { display: none !important; }
-                    .hero-stats { gap: 24px !important; }
-                    .hero-stats > div > div:first-child { font-size: 1.5rem !important; }
-                  }
-                  @media (max-width: 480px) {
-                    .hero-logo img { height: 48px !important; }
-                    .hero-preheading { font-size: 0.625rem !important; }
-                    .display-xl { font-size: 2rem !important; }
-                    .hero-subtitle { font-size: 0.9375rem !important; }
-                  }
-                `}</style>
               </div>
 
-              {/* Type Selector — hidden on mobile to keep it simple */}
-              <div className="hero-type-select" style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', position: 'relative' }}>
+              {/* Type select */}
+              <div className="hero-select-wrap" style={{ position: 'relative', flexShrink: 0 }}>
                 <select
                   value={type}
                   onChange={e => setType(e.target.value)}
                   style={{
-                    height: '100%', padding: 'var(--s-5) var(--s-10) var(--s-5) var(--s-5)',
-                    background: 'transparent',
-                    border: 'none',
-                    color: type ? 'var(--white)' : 'rgba(255,255,255,0.4)',
-                    fontSize: '0.875rem',
-                    cursor: 'pointer',
-                    appearance: 'none',
-                    outline: 'none',
-                    fontFamily: 'var(--font-body)',
-                    minWidth: 140,
+                    height: '100%', padding: '0 36px 0 14px',
+                    background: 'rgba(255,255,255,0.06)', border: 'none',
+                    color: type ? '#fff' : 'rgba(255,255,255,0.45)',
+                    fontSize: '0.875rem', cursor: 'pointer', appearance: 'none',
+                    outline: 'none', fontFamily: 'inherit', borderRadius: 12, minWidth: 130,
                   }}
                 >
                   <option value="">Any Type</option>
@@ -236,125 +206,98 @@ export default function Hero() {
                   <option value="penthouse">Penthouse</option>
                   <option value="loft">Loft</option>
                 </select>
-                <ChevronDown size={14} style={{ position: 'absolute', right: 'var(--s-4)', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }} />
+                <ChevronDown size={13} style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.4)', pointerEvents: 'none' }} />
               </div>
 
-              {/* Search Button */}
+              {/* Submit */}
               <button
                 type="submit"
-                className="hero-search-btn"
                 style={{
-                  padding: 'var(--s-5) var(--s-8)',
-                  background: '#059669',
-                  border: 'none',
-                  color: 'var(--white)',
-                  fontSize: '0.8125rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  transition: 'background var(--t-fast)',
-                  whiteSpace: 'nowrap',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
+                  padding: '0 28px', background: '#059669', border: 'none',
+                  borderRadius: 12, color: '#fff', fontWeight: 700,
+                  fontSize: '0.9375rem', cursor: 'pointer', flexShrink: 0,
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  transition: 'background 0.15s',
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = '#047857'}
                 onMouseLeave={e => e.currentTarget.style.background = '#059669'}
+                className="hero-search-btn"
               >
-                <Search size={15} /> Search
+                <Search size={16} />
+                <span className="hero-btn-text">Search</span>
               </button>
             </div>
           </form>
         </motion.div>
 
-        {/* Quick Searches */}
+        {/* Quick links */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 0.7 }}
+          style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 16, flexWrap: 'wrap' }}
           className="hero-quick"
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--s-2)', flexWrap: 'wrap' }}
         >
-          <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.4)', marginRight: 'var(--s-1)' }}>Popular:</span>
-          {QUICK_SEARCHES.map(q => (
+          <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.35)' }}>Popular:</span>
+          {['Washington DC', 'New York', 'Atlanta', 'Houston', 'Chicago'].map(city => (
             <button
-              key={q.label}
-              onClick={() => navigate(`/apartments?search=${encodeURIComponent(q.label)}`)}
+              key={city}
+              onClick={() => navigate(`/apartments?search=${encodeURIComponent(city)}`)}
               style={{
-                display: 'flex', alignItems: 'center', gap: '0.25rem',
-                padding: '0.375rem 0.875rem',
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: 'var(--r-full)',
-                color: 'rgba(255,255,255,0.65)',
-                fontSize: '0.8125rem',
-                fontWeight: 500,
-                cursor: 'pointer',
-                transition: 'all var(--t-fast)',
+                padding: '4px 12px', background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.15)',
+                borderRadius: 40, color: 'rgba(255,255,255,0.55)',
+                fontSize: '0.8125rem', cursor: 'pointer', transition: 'all 0.15s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(5,150,105,0.15)'; e.currentTarget.style.borderColor = 'rgba(5,150,105,0.4)'; e.currentTarget.style.color = '#34D399'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.65)'; }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = '#059669'; e.currentTarget.style.color = '#34D399'; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.color = 'rgba(255,255,255,0.55)'; }}
             >
-              <MapPin size={11} /> {q.label}
+              {city}
             </button>
           ))}
         </motion.div>
       </div>
 
-      {/* Bottom Stats */}
+      {/* Stats bar */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.0, duration: 0.6 }}
-        style={{
-          position: 'absolute', bottom: 'var(--s-12)', left: 0, right: 0,
-          zIndex: 2,
-        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.9 }}
+        style={{ position: 'relative', zIndex: 2, background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(16px)', borderTop: '1px solid rgba(255,255,255,0.07)' }}
       >
         <div className="container">
-          <div className="hero-stats" style={{
-            display: 'flex', justifyContent: 'center', gap: 'var(--s-12)',
-            borderTop: '1px solid rgba(255,255,255,0.07)',
-            paddingTop: 'var(--s-6)',
-            flexWrap: 'wrap',
-          }}>
-            {STATS.map(stat => (
-              <div key={stat.label} style={{ textAlign: 'center' }}>
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 600, color: '#059669', lineHeight: 1 }}>
-                  {stat.value}
-                </div>
-                <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: 'var(--s-1)', fontWeight: 500, letterSpacing: '0.05em' }}>
-                  {stat.label}
-                </div>
+          <div className="hero-stats" style={{ display: 'flex', justifyContent: 'space-around', padding: '20px 0', flexWrap: 'wrap', gap: 16 }}>
+            {STATS.map(s => (
+              <div key={s.label} style={{ textAlign: 'center', padding: '0 8px' }}>
+                <div style={{ fontSize: '1.75rem', fontWeight: 700, color: '#34D399', lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', marginTop: 4, letterSpacing: '0.04em' }}>{s.label}</div>
               </div>
             ))}
           </div>
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        style={{
-          position: 'absolute', bottom: 'var(--s-6)', left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--s-1)',
-        }}
-      >
-        <span style={{ fontSize: '0.6875rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 500 }}>
-          Scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          style={{ color: 'rgba(255,255,255,0.3)' }}
-        >
-          <ChevronDown size={16} />
-        </motion.div>
-      </motion.div>
+      <style>{`
+        input::placeholder { color: rgba(255,255,255,0.4) !important; }
+        option { background: #0B1A12; color: #fff; }
+
+        @media (max-width: 640px) {
+          .hero-heading { font-size: 2.25rem !important; }
+          .hero-sub { font-size: 0.9375rem !important; margin-bottom: 24px !important; }
+          .hero-form-row { flex-direction: column !important; gap: 8px !important; }
+          .hero-select-wrap { display: none !important; }
+          .hero-search-btn { padding: 14px !important; justify-content: center; border-radius: 12px !important; }
+          .hero-quick { display: none !important; }
+          .hero-city-badge { display: none !important; }
+          .hero-badges { gap: 6px !important; }
+          .hero-stats > div { padding: 0 4px !important; }
+          .hero-stats > div > div:first-child { font-size: 1.25rem !important; }
+        }
+        @media (max-width: 400px) {
+          .hero-heading { font-size: 1.875rem !important; }
+          .hero-badges > div > span { display: none; }
+        }
+      `}</style>
     </section>
   );
 }
