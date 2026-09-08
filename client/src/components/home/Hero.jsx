@@ -96,6 +96,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
+          className="hero-logo"
           style={{ marginBottom: 'var(--s-6)', display: 'flex', justifyContent: 'center' }}
         >
           <img
@@ -142,6 +143,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
+          className="hero-subtitle"
           style={{
             fontSize: '1.125rem',
             color: 'rgba(255,255,255,0.65)',
@@ -162,7 +164,7 @@ export default function Hero() {
           style={{ maxWidth: 700, margin: '0 auto var(--s-6)' }}
         >
           <form onSubmit={handleSearch}>
-            <div style={{
+            <div className="hero-search-bar" style={{
               display: 'flex',
               gap: 0,
               background: 'rgba(255,255,255,0.04)',
@@ -189,11 +191,27 @@ export default function Hero() {
                     outline: 'none',
                   }}
                 />
-                <style>{`input::placeholder { color: rgba(255,255,255,0.4); }`}</style>
+                <style>{`
+                  input::placeholder { color: rgba(255,255,255,0.4); }
+                  @media (max-width: 640px) {
+                    .hero-search-bar { flex-direction: column !important; border-radius: 16px !important; }
+                    .hero-search-bar > div { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.08); }
+                    .hero-search-btn { border-radius: 0 0 14px 14px !important; padding: 14px !important; justify-content: center; }
+                    .hero-quick { display: none !important; }
+                    .hero-stats { gap: 24px !important; }
+                    .hero-stats > div > div:first-child { font-size: 1.5rem !important; }
+                  }
+                  @media (max-width: 480px) {
+                    .hero-logo img { height: 48px !important; }
+                    .hero-preheading { font-size: 0.625rem !important; }
+                    .display-xl { font-size: 2rem !important; }
+                    .hero-subtitle { font-size: 0.9375rem !important; }
+                  }
+                `}</style>
               </div>
 
-              {/* Type Selector */}
-              <div style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', position: 'relative' }}>
+              {/* Type Selector — hidden on mobile to keep it simple */}
+              <div className="hero-type-select" style={{ borderLeft: '1px solid rgba(255,255,255,0.08)', position: 'relative' }}>
                 <select
                   value={type}
                   onChange={e => setType(e.target.value)}
@@ -224,6 +242,7 @@ export default function Hero() {
               {/* Search Button */}
               <button
                 type="submit"
+                className="hero-search-btn"
                 style={{
                   padding: 'var(--s-5) var(--s-8)',
                   background: '#059669',
@@ -236,11 +255,14 @@ export default function Hero() {
                   cursor: 'pointer',
                   transition: 'background var(--t-fast)',
                   whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
                 }}
-                onMouseEnter={e => e.target.style.background = '#047857'}
-                onMouseLeave={e => e.target.style.background = '#059669'}
+                onMouseEnter={e => e.currentTarget.style.background = '#047857'}
+                onMouseLeave={e => e.currentTarget.style.background = '#059669'}
               >
-                Search
+                <Search size={15} /> Search
               </button>
             </div>
           </form>
@@ -251,6 +273,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
+          className="hero-quick"
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--s-2)', flexWrap: 'wrap' }}
         >
           <span style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.4)', marginRight: 'var(--s-1)' }}>Popular:</span>
@@ -290,7 +313,7 @@ export default function Hero() {
         }}
       >
         <div className="container">
-          <div style={{
+          <div className="hero-stats" style={{
             display: 'flex', justifyContent: 'center', gap: 'var(--s-12)',
             borderTop: '1px solid rgba(255,255,255,0.07)',
             paddingTop: 'var(--s-6)',

@@ -1,11 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Search, Menu, User, X, Heart, LayoutDashboard, LogOut, ChevronDown } from 'lucide-react';
+import { Search, Menu, User, X, Heart, LayoutDashboard, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+
+const NAV_LINKS = [
+  { label: 'Apartments', href: '/apartments' },
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchVal, setSearchVal] = useState('');
   const location = useLocation();
@@ -19,7 +25,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  useEffect(() => { setMobileOpen(false); setDropdownOpen(false); }, [location]);
+  useEffect(() => { setDropdownOpen(false); }, [location]);
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -64,12 +70,12 @@ export default function Navbar() {
               onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'flex'; }}
             />
             <span style={{ display: 'none', fontWeight: 800, fontSize: '1rem', color: '#059669', letterSpacing: '0.04em', textTransform: 'uppercase', lineHeight: 1 }}>
-              ROTEX ONE<br/>
+              ROTEX ONE<br />
               <span style={{ fontWeight: 400, fontSize: '0.6rem', letterSpacing: '0.12em', color: '#6B8872' }}>REALTY</span>
             </span>
           </Link>
 
-          {/* Center Search */}
+          {/* Center Search — hidden on mobile */}
           <form onSubmit={handleSearch} style={{ flex: 1, maxWidth: 460, margin: '0 auto' }} className="nav-search-wrap">
             <div
               style={{
@@ -88,7 +94,7 @@ export default function Navbar() {
                   type="text"
                   value={searchVal}
                   onChange={e => setSearchVal(e.target.value)}
-                  placeholder="Search by neighborhood or type..."
+                  placeholder="Search by city, neighborhood or type..."
                   style={{
                     border: 'none', outline: 'none', background: 'transparent',
                     fontSize: '0.875rem', fontFamily: 'inherit', color: '#0B1A12',
@@ -120,12 +126,7 @@ export default function Navbar() {
 
           {/* Right Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
-            {[
-              { label: 'Apartments', href: '/apartments' },
-              { label: 'Services', href: '/services' },
-              { label: 'About', href: '/about' },
-              { label: 'Contact', href: '/contact' },
-            ].map(link => (
+            {NAV_LINKS.map(link => (
               <Link
                 key={link.href}
                 to={link.href}
@@ -146,7 +147,7 @@ export default function Navbar() {
               </Link>
             ))}
 
-            {/* Auth Menu */}
+            {/* Single Auth + Nav Menu */}
             <div ref={dropdownRef} style={{ position: 'relative', marginLeft: '4px' }}>
               <button
                 onClick={() => setDropdownOpen(o => !o)}
@@ -177,7 +178,7 @@ export default function Navbar() {
                   position: 'absolute', top: 'calc(100% + 8px)', right: 0,
                   background: 'white', border: '1px solid #D0DBD3',
                   borderRadius: '12px', boxShadow: '0 8px 28px rgba(0,0,0,0.15)',
-                  minWidth: 200, zIndex: 1001, overflow: 'hidden',
+                  minWidth: 210, zIndex: 1001, overflow: 'hidden',
                 }}>
                   {isAuthenticated ? (
                     <>
@@ -186,117 +187,43 @@ export default function Navbar() {
                         <div style={{ fontSize: '0.8125rem', color: '#6B8872', marginTop: '2px' }}>{user?.email}</div>
                       </div>
                       {isAdmin ? (
-                        <>
-                          <DropItem label="Admin panel" href="/admin" icon={<LayoutDashboard size={15} />} />
-                          <DropItem label="Sign out" onClick={handleLogout} icon={<LogOut size={15} />} danger />
-                        </>
+                        <DropItem label="Admin Panel" href="/admin" icon={<LayoutDashboard size={15} />} />
                       ) : (
                         <>
                           <DropItem label="Dashboard" href="/dashboard" icon={<LayoutDashboard size={15} />} />
-                          <DropItem label="Saved homes" href="/saved" icon={<Heart size={15} />} />
+                          <DropItem label="Saved Homes" href="/saved" icon={<Heart size={15} />} />
                           <DropItem label="Profile" href="/profile" icon={<User size={15} />} />
-                          <div style={{ borderTop: '1px solid #E8EEE9' }} />
-                          <DropItem label="Sign out" onClick={handleLogout} icon={<LogOut size={15} />} danger />
                         </>
                       )}
+                      {/* Nav links visible on mobile */}
+                      <div style={{ borderTop: '1px solid #E8EEE9' }} className="nav-dropdown-links" />
+                      {NAV_LINKS.map(l => (
+                        <DropItem key={l.href} label={l.label} href={l.href} className="nav-dropdown-links" />
+                      ))}
+                      <div style={{ borderTop: '1px solid #E8EEE9' }} />
+                      <DropItem label="Sign Out" onClick={handleLogout} icon={<LogOut size={15} />} danger />
                     </>
                   ) : (
                     <>
-                      <DropItem label="Log in" href="/login" bold />
-                      <DropItem label="Sign up" href="/register" />
+                      <DropItem label="Log In" href="/login" bold />
+                      <DropItem label="Sign Up" href="/register" />
                       <div style={{ borderTop: '1px solid #E8EEE9' }} />
-                      <DropItem label="Apartments" href="/apartments" />
-                      <DropItem label="Services" href="/services" />
-                      <DropItem label="About" href="/about" />
-                      <DropItem label="Contact" href="/contact" />
+                      {NAV_LINKS.map(l => (
+                        <DropItem key={l.href} label={l.label} href={l.href} />
+                      ))}
                     </>
                   )}
                 </div>
               )}
             </div>
-
-            {/* Mobile toggle */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              style={{
-                display: 'none',
-                alignItems: 'center', justifyContent: 'center',
-                width: 40, height: 40,
-                border: '1px solid #D0DBD3', borderRadius: '50%',
-                background: 'white', cursor: 'pointer', color: '#0B1A12',
-              }}
-              className="mobile-toggle"
-            >
-              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
           </div>
         </div>
       </header>
-
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div style={{
-          position: 'fixed', top: 'var(--header-h)', left: 0, right: 0, zIndex: 999,
-          background: '#fff', borderBottom: '1px solid #E8EEE9',
-          padding: '16px 24px 24px',
-        }}>
-          <form onSubmit={handleSearch} style={{ marginBottom: '16px' }}>
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: '8px',
-              border: '1px solid #D0DBD3', borderRadius: '12px', padding: '12px 16px',
-            }}>
-              <Search size={14} style={{ color: '#6B8872' }} />
-              <input
-                type="text" value={searchVal} onChange={e => setSearchVal(e.target.value)}
-                placeholder="Search residences..."
-                style={{ flex: 1, border: 'none', outline: 'none', fontSize: '0.9375rem', fontFamily: 'inherit', color: '#0B1A12' }}
-              />
-            </div>
-          </form>
-          {[
-            { label: 'Apartments', href: '/apartments' },
-            { label: 'Services', href: '/services' },
-            { label: 'About', href: '/about' },
-            { label: 'Contact', href: '/contact' },
-          ].map(link => (
-            <Link key={link.href} to={link.href} style={{
-              display: 'block', padding: '12px 0',
-              borderBottom: '1px solid #E8EEE9',
-              fontSize: '1rem', fontWeight: 500, color: '#0B1A12', textDecoration: 'none',
-            }}>
-              {link.label}
-            </Link>
-          ))}
-          {isAuthenticated ? (
-            <>
-              {!isAdmin && (
-                <>
-                  <Link to="/dashboard" style={{ display: 'block', padding: '12px 0', borderBottom: '1px solid #E8EEE9', fontSize: '1rem', fontWeight: 500, color: '#0B1A12', textDecoration: 'none' }}>Dashboard</Link>
-                  <Link to="/saved" style={{ display: 'block', padding: '12px 0', borderBottom: '1px solid #E8EEE9', fontSize: '1rem', fontWeight: 500, color: '#0B1A12', textDecoration: 'none' }}>Saved homes</Link>
-                  <Link to="/profile" style={{ display: 'block', padding: '12px 0', borderBottom: '1px solid #E8EEE9', fontSize: '1rem', fontWeight: 500, color: '#0B1A12', textDecoration: 'none' }}>Profile</Link>
-                </>
-              )}
-              {isAdmin && (
-                <Link to="/admin" style={{ display: 'block', padding: '12px 0', borderBottom: '1px solid #E8EEE9', fontSize: '1rem', fontWeight: 500, color: '#0B1A12', textDecoration: 'none' }}>Admin panel</Link>
-              )}
-              <button onClick={handleLogout} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '12px 0', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 500, color: '#DC2626', cursor: 'pointer' }}>
-                Sign out
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" style={{ display: 'block', padding: '12px 0', borderBottom: '1px solid #E8EEE9', fontSize: '1rem', fontWeight: 600, color: '#0B1A12', textDecoration: 'none' }}>Log in</Link>
-              <Link to="/register" style={{ display: 'block', padding: '12px 0', fontSize: '1rem', fontWeight: 500, color: '#0B1A12', textDecoration: 'none' }}>Sign up</Link>
-            </>
-          )}
-        </div>
-      )}
 
       <style>{`
         @media (max-width: 768px) {
           .nav-search-wrap { display: none !important; }
           .nav-link-desktop { display: none !important; }
-          .mobile-toggle { display: flex !important; }
         }
       `}</style>
     </>
