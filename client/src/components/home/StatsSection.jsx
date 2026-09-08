@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { Building2, Users, Star, Clock } from 'lucide-react';
 
 const STATS = [
-  { icon: Building2, value: 200, suffix: '+', label: 'Premium Listings', sublabel: 'Curated across DC' },
+  { icon: Building2, value: 500, suffix: '+', label: 'Premium Listings', sublabel: 'Across 30+ US states' },
   { icon: Users, value: 3500, suffix: '+', label: 'Satisfied Clients', sublabel: 'And growing every year' },
   { icon: Star, value: 4.9, suffix: '', label: 'Client Rating', sublabel: 'From verified residents' },
-  { icon: Clock, value: 15, suffix: ' Years', label: 'Of Expertise', sublabel: 'Serving Washington DC' },
+  { icon: Clock, value: 15, suffix: ' Years', label: 'Of Expertise', sublabel: 'Nationwide since 2009' },
 ];
 
 function useCountUp(target, duration = 2000, isVisible) {

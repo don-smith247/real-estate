@@ -52,12 +52,12 @@ export default function Listings() {
 
       {/* Page Header */}
       <div style={{ paddingTop: 'var(--header-h)', borderBottom: '1px solid #EEEEEE' }}>
-        <div className="container" style={{ padding: '32px var(--s-6) 0' }}>
+        <div className="container listings-header" style={{ padding: '32px var(--s-6) 0' }}>
           <h1 style={{ marginBottom: '4px', color: '#222', letterSpacing: '-0.025em' }}>
-            Apartments in Washington DC
+            Rentals Across the United States
           </h1>
           <p style={{ color: '#717171', fontSize: '1rem', marginBottom: '24px' }}>
-            Premium long-term rentals across DC's most coveted neighborhoods
+            Premium long-term rentals in Washington DC and major cities nationwide
           </p>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default function Listings() {
 
           {/* Grid */}
           {loading ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '24px' }}>
+            <div className="listings-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '24px' }}>
               {[...Array(12)].map((_, i) => (
                 <div key={i}>
                   <div className="skeleton" style={{ aspectRatio: '1/1', borderRadius: '12px', marginBottom: '12px' }} />
@@ -106,6 +106,7 @@ export default function Listings() {
             </div>
           ) : (
             <motion.div
+              className="listings-grid"
               style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '24px' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -152,6 +153,16 @@ export default function Listings() {
       </section>
 
       <Footer />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .listings-header h1 { font-size: 1.5rem !important; }
+          .listings-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
+        }
+        @media (max-width: 480px) {
+          .listings-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 }

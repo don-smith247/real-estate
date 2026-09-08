@@ -5,7 +5,7 @@ import { settingsApi } from '../../utils/api';
 
 const DEFAULTS = {
   contactPhone: '(202) 555-0180',
-  contactEmail: 'hello@rotexonerealty.com',
+  contactEmail: 'info@rotexone.com',
   officeAddress: '1600 K Street NW',
   officeCity: 'Washington, DC 20006',
   companyTagline: "Washington DC's premier rental service.",

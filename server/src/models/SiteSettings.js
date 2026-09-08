@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const siteSettingsSchema = new mongoose.Schema({
   contactPhone:    { type: String, default: '(202) 555-0180' },
-  contactEmail:    { type: String, default: 'hello@rotexonerealty.com' },
+  contactEmail:    { type: String, default: 'info@rotexone.com' },
   officeAddress:   { type: String, default: '1600 K Street NW' },
   officeCity:      { type: String, default: 'Washington, DC 20006' },
   officeHours:     { type: String, default: 'Mon–Fri: 9am–6pm · Sat: 10am–4pm' },

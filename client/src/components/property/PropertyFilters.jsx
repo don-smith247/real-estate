@@ -16,8 +16,8 @@ const TYPES = [
 const PRICE_RANGES = [
   { value: '', label: 'Any price' },
   { value: '0-2000', label: 'Under $2,000' },
-  { value: '2000-3000', label: '$2,000 – $3,000' },
-  { value: '3000-5000', label: '$3,000 – $5,000' },
+  { value: '2000-3000', label: '$2,000 to $3,000' },
+  { value: '3000-5000', label: '$3,000 to $5,000' },
   { value: '5000-999999', label: '$5,000+' },
 ];
 
@@ -66,7 +66,7 @@ export default function PropertyFilters({ onFilter, total, loading }) {
   return (
     <div style={{ marginBottom: 'var(--s-6)' }}>
       {/* Top Bar */}
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
+      <div className="filter-top-bar" style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', marginBottom: '16px' }}>
         {/* Search */}
         <div style={{
           flex: 1, minWidth: 220,
@@ -79,7 +79,7 @@ export default function PropertyFilters({ onFilter, total, loading }) {
           <Search size={15} style={{ color: '#717171', flexShrink: 0 }} />
           <input
             type="text"
-            placeholder="Search by neighborhood or keyword..."
+            placeholder="Search by city, state or keyword..."
             value={search}
             onChange={e => { setSearch(e.target.value); debouncedSearch(e.target.value); }}
             style={{
@@ -226,6 +226,15 @@ export default function PropertyFilters({ onFilter, total, loading }) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .filter-top-bar { flex-direction: column !important; align-items: stretch !important; }
+          .filter-top-bar > div:first-child { min-width: 0 !important; }
+          .type-pills { overflow-x: auto; padding-bottom: 4px; }
+          .type-pills::-webkit-scrollbar { display: none; }
+        }
+      `}</style>
 
       {/* Results count */}
       <p style={{ fontSize: '0.875rem', color: '#717171' }}>

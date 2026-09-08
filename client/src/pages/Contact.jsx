@@ -7,7 +7,7 @@ import InquiryForm from '../components/forms/InquiryForm';
 import { settingsApi } from '../utils/api';
 
 const DEFAULTS = {
-  contactPhone: '(202) 555-0180', contactEmail: 'hello@rotexonerealty.com',
+  contactPhone: '(202) 555-0180', contactEmail: 'info@rotexone.com',
   officeAddress: '1600 K Street NW', officeCity: 'Washington, DC 20006',
   officeHours: 'Mon–Fri: 9am–6pm · Sat: 10am–4pm',
   instagramUrl: '#', facebookUrl: '#', linkedinUrl: '#',

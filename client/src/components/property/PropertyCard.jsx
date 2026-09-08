@@ -101,7 +101,7 @@ export default function PropertyCard({ property, index = 0 }) {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '2px' }}>
             <div style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#222', lineHeight: 1.3, flex: 1 }}>
-              {property.neighborhood ? `${property.neighborhood}, Washington DC` : property.title}
+              {property.neighborhood || property.title}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '2px', flexShrink: 0 }}>
               <Star size={12} fill="#222" stroke="none" />
