@@ -5,26 +5,26 @@ import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 
 const VALUES = [
-  { icon: Shield, title: 'Integrity First', desc: 'Every transaction is built on complete transparency. No hidden fees, no surprise charges, no ambiguity — only honest guidance and clear terms from day one.' },
+  { icon: Shield, title: 'Integrity First', desc: 'Every transaction is built on complete transparency. No hidden fees, no surprise charges. Honest guidance and clear terms from day one.' },
   { icon: Heart, title: 'Client-Centered', desc: 'Our clients are our community. Everything we do is designed around your needs, your timeline, and your vision of an exceptional home.' },
-  { icon: Award, title: 'Curated Excellence', desc: 'We represent only properties we\'d be proud to call home ourselves. Our portfolio is built on quality, character, and a relentless eye for detail.' },
-  { icon: Zap, title: 'Responsive Service', desc: 'Every inquiry answered within hours. Every concern resolved with urgency. We take our commitment to your experience seriously — always.' },
+  { icon: Award, title: 'Curated Excellence', desc: 'We represent only properties we would be proud to call home ourselves. Our portfolio is built on quality, character, and attention to detail.' },
+  { icon: Zap, title: 'Responsive Service', desc: 'Every inquiry answered within hours. Every concern resolved with urgency. We take our commitment to your experience seriously.' },
 ];
 
 const TEAM = [
-  { name: 'Victoria Pemberton', role: 'Founder & Principal Broker', bio: '20+ years leading luxury residential transactions across the Washington metropolitan area.' },
-  { name: 'James Okafor', role: 'Director of Leasing', bio: 'A specialist in matching discerning clients with their ideal residence across DC\'s premier neighborhoods.' },
+  { name: 'Victoria Pemberton', role: 'Founder & Principal Broker', bio: '20 years of experience leading luxury residential transactions across major US cities.' },
+  { name: 'James Okafor', role: 'Director of Leasing', bio: 'Specialist in matching clients with their ideal residence across our nationwide portfolio of premier properties.' },
   { name: 'Sophia Lane', role: 'Head of Client Experience', bio: 'Ensures every interaction meets the Rotex One standard of excellence, from first call to move-in day.' },
-  { name: 'Raymond Kessler', role: 'Property Portfolio Manager', bio: 'Oversees our curated portfolio with an eye for quality, resident satisfaction, and long-term value.' },
+  { name: 'Raymond Kessler', role: 'Property Portfolio Manager', bio: 'Oversees our nationwide portfolio with an eye for quality, resident satisfaction, and long-term value.' },
 ];
 
 const FAQ = [
-  { q: 'What is the typical lease term?', a: 'Our standard lease is 12 months, but Rotex One Realty offers 6, 18, and 24-month terms depending on the property. Contact us for flexible arrangements tailored to your needs.' },
-  { q: 'How quickly can I move in?', a: 'For available units, we can typically facilitate move-in within 1–2 weeks after lease signing and deposit payment. Our team works to accommodate your timeline.' },
-  { q: 'What credit score do I need?', a: 'We generally require a minimum credit score of 650 and monthly income of 3x the rent. We evaluate each application holistically and consider the full picture.' },
+  { q: 'What is the typical lease term?', a: 'Our standard lease is 12 months. Rotex One Realty also offers 6, 18, and 24-month terms depending on the property. Contact us for flexible arrangements tailored to your needs.' },
+  { q: 'How quickly can I move in?', a: 'For available units, we can typically facilitate move-in within 1 to 2 weeks after lease signing and deposit payment. Our team works to accommodate your timeline.' },
+  { q: 'What credit score do I need?', a: 'We generally require a minimum credit score of 650 and monthly income of 3x the rent. We evaluate each application on its full merits.' },
   { q: 'Do you accept co-signers?', a: 'Yes, co-signers are accepted for qualified applicants who may not meet all income requirements independently. Contact our leasing team for details.' },
-  { q: 'Are any utilities included?', a: 'This varies by property. Some residences include water, gas, or trash. All inclusive utilities are clearly noted on each listing.' },
-  { q: 'What is your pet policy?', a: 'Many of our properties are pet-friendly for cats and/or dogs. Pet policies, deposits, and restrictions vary by building and are listed on each property page.' },
+  { q: 'Are any utilities included?', a: 'This varies by property. Some residences include water, gas, or trash. All included utilities are clearly noted on each listing page.' },
+  { q: 'What is your pet policy?', a: 'Many of our properties are pet-friendly. Pet policies, deposits, and restrictions vary by building and are listed on each property page.' },
 ];
 
 export default function About() {
@@ -44,7 +44,7 @@ export default function About() {
               <span style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Renting Should Feel Like</span>
             </h1>
             <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, maxWidth: 620, marginBottom: 'var(--s-8)' }}>
-              Rotex One Realty was founded on a conviction that the rental experience should match the quality of the residence itself. For fifteen years, we have served Washington's most discerning clients with the expertise, integrity, and personal attention that the nation's capital demands.
+              Rotex One Realty was founded on the belief that the rental experience should match the quality of the residence itself. For fifteen years, we have served clients across the United States with the expertise, integrity, and personal attention they deserve. Headquartered in Washington DC, with offices in major cities nationwide.
             </p>
             <Link
               to="/apartments"
@@ -160,6 +160,17 @@ export default function About() {
       </section>
 
       <Footer />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .about-hero h1 { font-size: 2rem !important; }
+          .about-values { grid-template-columns: 1fr !important; }
+          .about-team { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .about-team { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </motion.div>
   );
 }

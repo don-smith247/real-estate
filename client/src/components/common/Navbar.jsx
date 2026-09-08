@@ -58,7 +58,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0, textDecoration: 'none' }}>
             <img
-              src="/uploads/logo.PNG"
+              src="/logo.PNG"
               alt="Rotex One Realty"
               style={{ height: 40, width: 'auto', maxWidth: 120, objectFit: 'contain' }}
               onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'flex'; }}

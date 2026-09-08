@@ -17,14 +17,14 @@ const DEFAULTS = {
 
 const NAV_COLS = [
   {
-    title: 'Neighborhoods',
+    title: 'Top Cities',
     links: [
-      { label: 'Dupont Circle',   href: '/apartments?search=Dupont+Circle' },
-      { label: 'Capitol Hill',    href: '/apartments?search=Capitol+Hill' },
-      { label: 'Georgetown',      href: '/apartments?search=Georgetown' },
-      { label: 'Adams Morgan',    href: '/apartments?search=Adams+Morgan' },
-      { label: 'Shaw',            href: '/apartments?search=Shaw' },
-      { label: 'Logan Circle',    href: '/apartments?search=Logan+Circle' },
+      { label: 'Washington DC',   href: '/apartments?search=Washington' },
+      { label: 'New York City',   href: '/apartments?search=New+York' },
+      { label: 'Atlanta',         href: '/apartments?search=Atlanta' },
+      { label: 'Houston',         href: '/apartments?search=Houston' },
+      { label: 'Chicago',         href: '/apartments?search=Chicago' },
+      { label: 'Miami',           href: '/apartments?search=Miami' },
     ],
   },
   {
@@ -76,7 +76,7 @@ export default function Footer() {
           <div>
             <Link to="/" style={{ display: 'inline-block', marginBottom: 16 }}>
               <img
-                src="/uploads/logo.PNG"
+                src="/logo.PNG"
                 alt="Rotex One Realty"
                 style={{ height: 44, width: 'auto', objectFit: 'contain' }}
                 onError={e => { e.currentTarget.style.display = 'none'; }}

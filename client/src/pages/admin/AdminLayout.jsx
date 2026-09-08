@@ -39,7 +39,7 @@ export default function AdminLayout() {
       {/* Logo */}
       <div style={{ padding: 'var(--s-4) var(--s-4)', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: 'var(--s-3)', minHeight: 64 }}>
         <img
-          src="/uploads/logo.PNG"
+          src="/logo.PNG"
           alt="Rotex One Realty"
           style={{ height: 36, width: 36, objectFit: 'contain', borderRadius: 6, flexShrink: 0 }}
           onError={e => { e.currentTarget.style.display = 'none'; }}

@@ -8,22 +8,22 @@ const SERVICES = [
   {
     icon: Search,
     title: 'Rental Search & Placement',
-    desc: 'We match you with residences that align with your lifestyle, budget, and timeline. Our advisors leverage deep market knowledge to surface options you won\'t find on your own.',
+    desc: 'We match you with residences that fit your lifestyle, budget, and timeline. Our advisors use deep market knowledge to find options you would not discover on your own.',
   },
   {
     icon: Eye,
     title: 'Virtual & In-Person Tours',
-    desc: 'Schedule flexible viewings with our expert advisors, available six days a week. Whether you prefer an immersive in-person experience or a high-definition virtual walkthrough, we accommodate your needs.',
+    desc: 'Schedule flexible viewings with our expert advisors, available six days a week. We offer both in-person tours and high-definition virtual walkthroughs across all our markets.',
   },
   {
     icon: FileText,
     title: 'Lease Negotiation',
-    desc: 'Our team advocates for your best interests through every stage of the leasing process — from initial terms to move-in conditions — so you enter your new home with complete confidence.',
+    desc: 'Our team advocates for your best interests through every stage of the leasing process. From initial terms to move-in conditions, we ensure you enter your new home with full confidence.',
   },
   {
     icon: MapPin,
     title: 'Relocation Assistance',
-    desc: 'Moving to Washington from another city? We guide you from first call to first night home. Our relocation specialists understand the urgency and complexity of cross-city moves.',
+    desc: 'Moving to a new city? We guide you from first call to first night home. Our relocation specialists understand the urgency and complexity of cross-city and cross-state moves.',
   },
   {
     icon: Building2,
@@ -33,7 +33,7 @@ const SERVICES = [
   {
     icon: BarChart3,
     title: 'Market Advisory',
-    desc: 'Trusted insights on DC\'s rental market — pricing trends, neighborhood dynamics, and optimal timing. We help both clients and property owners make informed, strategic decisions.',
+    desc: 'Trusted insights on rental markets across our network. Pricing trends, neighborhood dynamics, and optimal timing. We help clients and property owners make informed decisions.',
   },
 ];
 
@@ -41,17 +41,17 @@ const PROCESS = [
   {
     step: '01',
     title: 'Consult',
-    desc: 'We begin with a thorough consultation to understand your priorities, preferences, and timeline. No generic questionnaires — a real conversation with an experienced advisor.',
+    desc: 'We start with a thorough consultation to understand your priorities, preferences, and timeline. A real conversation with an experienced advisor, not a generic questionnaire.',
   },
   {
     step: '02',
     title: 'View',
-    desc: 'We curate a personalized selection of residences and accompany you through every viewing, offering candid professional insight at each property.',
+    desc: 'We put together a personalized selection of residences and accompany you through every viewing, offering honest professional insight at each property.',
   },
   {
     step: '03',
     title: 'Move In',
-    desc: 'From lease signing to handing you your keys, our team manages every detail so your move-in day is exactly what it should be — the beginning of something exceptional.',
+    desc: 'From lease signing to handing you your keys, our team manages every detail so your move-in day is exactly what it should be.',
   },
 ];
 
@@ -88,7 +88,7 @@ export default function Services() {
               <span style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Built Around You</span>
             </h1>
             <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, maxWidth: 580, marginBottom: 'var(--s-8)' }}>
-              From your first search to the day you sign your lease, Rotex One Realty provides the full spectrum of services that discerning clients in Washington DC deserve.
+              From your first search to the day you sign your lease, Rotex One Realty provides the full range of services that clients across the United States deserve.
             </p>
             <Link
               to="/contact"
@@ -178,7 +178,7 @@ export default function Services() {
             <div className="section-label" style={{ justifyContent: 'center' }}><span>How It Works</span></div>
             <h2>A Simple, Guided <span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Process</span></h2>
             <p style={{ fontSize: '1.0625rem', color: 'var(--gray-500)', maxWidth: 520, margin: '0 auto', lineHeight: 1.7, marginTop: 'var(--s-4)' }}>
-              We've refined our process over 15 years to make finding your ideal Washington residence as effortless as it should be.
+              We have refined our process over 15 years to make finding your ideal residence as straightforward as it should be.
             </p>
           </div>
 
@@ -232,7 +232,7 @@ export default function Services() {
               <span style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Rotex One Difference?</span>
             </h2>
             <p style={{ fontSize: '1.0625rem', color: 'rgba(255,255,255,0.55)', maxWidth: 480, margin: '0 auto var(--s-8)', lineHeight: 1.7 }}>
-              Connect with our team today and discover how effortless finding the right home in Washington DC can truly be.
+              Connect with our team today and discover how simple finding the right home across the United States can be.
             </p>
             <div style={{ display: 'flex', gap: 'var(--s-4)', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link
@@ -277,6 +277,17 @@ export default function Services() {
       </section>
 
       <Footer />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .services-grid { grid-template-columns: 1fr !important; }
+          .process-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .services-cta-btns { flex-direction: column !important; align-items: stretch !important; }
+          .services-cta-btns a { text-align: center; justify-content: center; }
+        }
+      `}</style>
     </motion.div>
   );
 }

@@ -33,9 +33,9 @@ export default function Register() {
     }
   };
 
-  const field = (label, key, type = 'text', placeholder = '', extra = {}) => (
+  const field = (label, key, type = 'text', placeholder = '') => (
     <div>
-      <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: '#222', marginBottom: '6px' }}>
+      <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: '#0B1A12', marginBottom: '6px' }}>
         {label}
       </label>
       <input
@@ -46,38 +46,41 @@ export default function Register() {
         placeholder={placeholder}
         style={{
           width: '100%', padding: '12px 14px',
-          border: '1px solid #DDDDDD', borderRadius: '8px',
-          fontSize: '0.9375rem', fontFamily: 'inherit', color: '#222',
+          border: '1px solid #D0DBD3', borderRadius: '8px',
+          fontSize: '0.9375rem', fontFamily: 'inherit', color: '#0B1A12',
           outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.15s',
-          ...extra,
         }}
-        onFocus={e => e.target.style.borderColor = '#222'}
-        onBlur={e => e.target.style.borderColor = '#DDDDDD'}
+        onFocus={e => e.target.style.borderColor = '#059669'}
+        onBlur={e => e.target.style.borderColor = '#D0DBD3'}
       />
     </div>
   );
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff', display: 'flex', flexDirection: 'column' }}>
-      <header style={{ borderBottom: '1px solid #EEEEEE', padding: '16px 24px' }}>
-        <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-            <path d="M16 2C9 9 3 14.5 3 20.5C3 25.2 8.9 29 16 29C23.1 29 29 25.2 29 20.5C29 14.5 23 9 16 2Z" fill="#FF385C" />
-            <path d="M12 22L16 14L20 22" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M13.5 19.5H18.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-          <span style={{ fontWeight: 700, fontSize: '1.25rem', color: '#FF385C', letterSpacing: '-0.02em' }}>arcadia</span>
+    <div style={{ minHeight: '100vh', background: '#F4F7F5', display: 'flex', flexDirection: 'column' }}>
+      <header style={{ borderBottom: '1px solid #E8EEE9', padding: '16px 24px', background: '#fff' }}>
+        <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+          <img
+            src="/logo.PNG"
+            alt="Rotex One Realty"
+            style={{ height: 36, width: 'auto', objectFit: 'contain' }}
+            onError={e => { e.currentTarget.style.display = 'none'; }}
+          />
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '0.9375rem', color: '#0B1A12', letterSpacing: '0.02em', lineHeight: 1.2 }}>ROTEX ONE</div>
+            <div style={{ fontSize: '0.5625rem', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#059669' }}>Realty</div>
+          </div>
         </Link>
       </header>
 
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 24px' }}>
         <div style={{ width: '100%', maxWidth: 480 }}>
-          <div style={{ border: '1px solid #DDDDDD', borderRadius: '16px', padding: '40px', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#222', marginBottom: '8px', letterSpacing: '-0.02em' }}>
+          <div style={{ border: '1px solid #D0DBD3', borderRadius: '16px', padding: '40px', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', background: '#fff' }}>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0B1A12', marginBottom: '8px', letterSpacing: '-0.02em' }}>
               Create your account
             </h1>
-            <p style={{ color: '#717171', fontSize: '0.9375rem', marginBottom: '28px' }}>
-              Join Arcadia to save homes and schedule tours
+            <p style={{ color: '#6B8872', fontSize: '0.9375rem', marginBottom: '28px' }}>
+              Join Rotex One Realty to save homes and schedule tours
             </p>
 
             {error && (
@@ -91,7 +94,7 @@ export default function Register() {
               {field('Email address', 'email', 'email', 'you@example.com')}
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: '#222', marginBottom: '6px' }}>
+                <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: '#0B1A12', marginBottom: '6px' }}>
                   Password
                 </label>
                 <div style={{ position: 'relative' }}>
@@ -103,15 +106,16 @@ export default function Register() {
                     placeholder="Min. 6 characters"
                     style={{
                       width: '100%', padding: '12px 44px 12px 14px',
-                      border: '1px solid #DDDDDD', borderRadius: '8px',
-                      fontSize: '0.9375rem', fontFamily: 'inherit', color: '#222',
+                      border: '1px solid #D0DBD3', borderRadius: '8px',
+                      fontSize: '0.9375rem', fontFamily: 'inherit', color: '#0B1A12',
                       outline: 'none', boxSizing: 'border-box',
+                      transition: 'border-color 0.15s',
                     }}
-                    onFocus={e => e.target.style.borderColor = '#222'}
-                    onBlur={e => e.target.style.borderColor = '#DDDDDD'}
+                    onFocus={e => e.target.style.borderColor = '#059669'}
+                    onBlur={e => e.target.style.borderColor = '#D0DBD3'}
                   />
                   <button type="button" onClick={() => setShowPw(s => !s)}
-                    style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#717171', display: 'flex' }}>
+                    style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#6B8872', display: 'flex' }}>
                     {showPw ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
@@ -124,33 +128,35 @@ export default function Register() {
                 disabled={loading}
                 style={{
                   width: '100%', padding: '14px',
-                  background: loading ? '#ffb3c0' : '#FF385C',
+                  background: loading ? '#6ee7b7' : '#059669',
                   color: 'white', border: 'none', borderRadius: '8px',
                   fontSize: '1rem', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer',
                   marginTop: '8px', transition: 'background 0.15s',
                 }}
+                onMouseEnter={e => { if (!loading) e.currentTarget.style.background = '#047857'; }}
+                onMouseLeave={e => { if (!loading) e.currentTarget.style.background = '#059669'; }}
               >
-                {loading ? 'Creating account…' : 'Create account'}
+                {loading ? 'Creating account...' : 'Create Account'}
               </button>
 
-              <p style={{ fontSize: '0.8125rem', color: '#717171', textAlign: 'center', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.8125rem', color: '#6B8872', textAlign: 'center', lineHeight: 1.5 }}>
                 By signing up, you agree to our{' '}
-                <a href="#" style={{ color: '#222', textDecoration: 'underline' }}>Terms of Service</a>
+                <a href="#" style={{ color: '#0B1A12', textDecoration: 'underline' }}>Terms of Service</a>
                 {' '}and{' '}
-                <a href="#" style={{ color: '#222', textDecoration: 'underline' }}>Privacy Policy</a>.
+                <a href="#" style={{ color: '#0B1A12', textDecoration: 'underline' }}>Privacy Policy</a>.
               </p>
             </form>
 
             <div style={{ margin: '24px 0', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ flex: 1, height: '1px', background: '#EEEEEE' }} />
-              <span style={{ fontSize: '0.8125rem', color: '#717171' }}>or</span>
-              <div style={{ flex: 1, height: '1px', background: '#EEEEEE' }} />
+              <div style={{ flex: 1, height: '1px', background: '#E8EEE9' }} />
+              <span style={{ fontSize: '0.8125rem', color: '#6B8872' }}>or</span>
+              <div style={{ flex: 1, height: '1px', background: '#E8EEE9' }} />
             </div>
 
-            <p style={{ textAlign: 'center', fontSize: '0.9375rem', color: '#222' }}>
+            <p style={{ textAlign: 'center', fontSize: '0.9375rem', color: '#0B1A12' }}>
               Already have an account?{' '}
-              <Link to="/login" style={{ color: '#FF385C', fontWeight: 600, textDecoration: 'none' }}>
-                Log in
+              <Link to="/login" style={{ color: '#059669', fontWeight: 600, textDecoration: 'none' }}>
+                Sign in
               </Link>
             </p>
           </div>

@@ -10,17 +10,17 @@ const HERO_IMAGES = [
 ];
 
 const QUICK_SEARCHES = [
-  { label: 'Dupont Circle', icon: MapPin },
-  { label: 'Georgetown', icon: MapPin },
-  { label: 'Capitol Hill', icon: MapPin },
-  { label: 'Shaw', icon: MapPin },
+  { label: 'Washington DC', icon: MapPin },
+  { label: 'New York', icon: MapPin },
+  { label: 'Atlanta', icon: MapPin },
+  { label: 'Houston', icon: MapPin },
 ];
 
 const STATS = [
-  { value: '200+', label: 'Premium Listings' },
+  { value: '500+', label: 'Premium Listings' },
   { value: '15yrs', label: 'Trusted Expertise' },
   { value: '98%', label: 'Client Satisfaction' },
-  { value: '48hr', label: 'Move-In Ready' },
+  { value: '30+', label: 'States Covered' },
 ];
 
 export default function Hero() {
@@ -62,17 +62,17 @@ export default function Hero() {
             backgroundImage: `url(${img})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: i === imgIndex ? 0.28 : 0,
+            opacity: i === imgIndex ? 0.42 : 0,
             transition: 'opacity 1.5s ease',
             transform: 'scale(1.05)',
           }}
         />
       ))}
 
-      {/* Gradient Overlays */}
+      {/* Gradient Overlay */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(135deg, rgba(11,26,18,0.95) 0%, rgba(11,26,18,0.65) 50%, rgba(11,26,18,0.85) 100%)',
+        background: 'linear-gradient(135deg, rgba(11,26,18,0.88) 0%, rgba(11,26,18,0.55) 50%, rgba(11,26,18,0.80) 100%)',
         pointerEvents: 'none',
       }} />
       <div style={{
@@ -91,6 +91,21 @@ export default function Hero() {
       {/* Content */}
       <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center', paddingTop: 'var(--header-h)' }}>
 
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          style={{ marginBottom: 'var(--s-6)', display: 'flex', justifyContent: 'center' }}
+        >
+          <img
+            src="/logo.PNG"
+            alt="Rotex One Realty"
+            style={{ height: 64, width: 'auto', objectFit: 'contain' }}
+            onError={e => { e.currentTarget.style.display = 'none'; }}
+          />
+        </motion.div>
+
         {/* Pre-heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -100,7 +115,7 @@ export default function Hero() {
         >
           <div style={{ width: '2rem', height: '1px', background: '#059669' }} />
           <span style={{ fontSize: '0.6875rem', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#059669' }}>
-            Washington DC — Premiere Rental Properties
+            United States | Nationwide Rental Properties
           </span>
           <div style={{ width: '2rem', height: '1px', background: '#059669' }} />
         </motion.div>
@@ -136,7 +151,7 @@ export default function Hero() {
             fontWeight: 300,
           }}
         >
-          Rotex One Realty brings decades of expertise to connecting discerning clients with Washington's most coveted rental residences.
+          Rotex One Realty connects clients with premium rental residences across the United States. Headquartered in Washington DC with offices in major cities nationwide.
         </motion.p>
 
         {/* Search Form */}
@@ -162,7 +177,7 @@ export default function Hero() {
                 <Search size={18} style={{ position: 'absolute', left: 'var(--s-5)', color: 'rgba(255,255,255,0.4)' }} />
                 <input
                   type="text"
-                  placeholder="Neighborhood, address, or keyword..."
+                  placeholder="City, neighborhood, or state..."
                   value={search}
                   onChange={e => setSearch(e.target.value)}
                   style={{

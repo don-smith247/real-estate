@@ -23,9 +23,24 @@ const TYPES = [
 ];
 
 const HOW_IT_WORKS = [
-  { num: '1', title: 'Browse Residences', desc: 'Explore our curated portfolio of premium apartments across DC\'s most desirable neighborhoods. Filter by type, price, and lifestyle preferences.' },
-  { num: '2', title: 'Schedule a Viewing', desc: 'Book an in-person or virtual tour with one of our expert advisors. We respond within a few hours and accommodate your schedule.' },
-  { num: '3', title: 'Apply & Move In', desc: 'Complete our streamlined application and let Rotex One Realty handle the details. We review within 24–48 hours and guide you every step to move-in day.' },
+  { num: '1', title: 'Browse Residences', desc: 'Explore our curated portfolio of premium apartments across America\'s most desirable cities. Filter by type, price, and lifestyle preferences.' },
+  { num: '2', title: 'Schedule a Viewing', desc: 'Book an in-person or virtual tour with one of our expert advisors. We respond within a few hours and work around your schedule.' },
+  { num: '3', title: 'Apply & Move In', desc: 'Complete our straightforward application and let Rotex One Realty handle the details. We review within 24 to 48 hours and guide you every step to move-in day.' },
+];
+
+const STATES = [
+  { name: 'Washington DC', abbr: 'DC', city: 'Washington' },
+  { name: 'New York', abbr: 'NY', city: 'New York City' },
+  { name: 'California', abbr: 'CA', city: 'Los Angeles' },
+  { name: 'Texas', abbr: 'TX', city: 'Houston' },
+  { name: 'Florida', abbr: 'FL', city: 'Miami' },
+  { name: 'Illinois', abbr: 'IL', city: 'Chicago' },
+  { name: 'Georgia', abbr: 'GA', city: 'Atlanta' },
+  { name: 'Virginia', abbr: 'VA', city: 'Arlington' },
+  { name: 'Maryland', abbr: 'MD', city: 'Baltimore' },
+  { name: 'North Carolina', abbr: 'NC', city: 'Charlotte' },
+  { name: 'Arizona', abbr: 'AZ', city: 'Phoenix' },
+  { name: 'Nevada', abbr: 'NV', city: 'Las Vegas' },
 ];
 
 export default function Home() {
@@ -68,6 +83,44 @@ export default function Home() {
       {/* Stats Section */}
       <StatsSection />
 
+      {/* Browse by State */}
+      <section style={{ padding: '56px 0 48px', background: '#F4F7F5' }}>
+        <div className="container">
+          <h2 style={{ marginBottom: '8px', color: '#0B1A12', letterSpacing: '-0.025em' }}>
+            Browse Rentals by State
+          </h2>
+          <p style={{ fontSize: '1.0625rem', color: '#6B8872', marginBottom: '32px', maxWidth: 480 }}>
+            We operate in major cities across the country. Find available properties near you.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '12px' }}>
+            {STATES.map(state => (
+              <button
+                key={state.abbr}
+                onClick={() => navigate(`/apartments?search=${encodeURIComponent(state.city)}`)}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '14px 16px',
+                  background: '#fff',
+                  border: '1px solid #D0DBD3',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  textAlign: 'left',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#059669'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(5,150,105,0.12)'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = '#D0DBD3'; e.currentTarget.style.boxShadow = ''; e.currentTarget.style.transform = ''; }}
+              >
+                <div>
+                  <div style={{ fontSize: '0.875rem', fontWeight: 600, color: '#0B1A12' }}>{state.name}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#6B8872', marginTop: '2px' }}>{state.city}</div>
+                </div>
+                <div style={{ fontSize: '1.125rem', fontWeight: 700, color: '#059669', opacity: 0.6 }}>{state.abbr}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Property Search Section */}
       <section style={{
         paddingTop: '56px',
@@ -77,10 +130,10 @@ export default function Home() {
       }}>
         <div className="container">
           <h2 style={{ marginBottom: '8px', color: '#0B1A12', letterSpacing: '-0.025em' }}>
-            Find Your Next Residence in DC
+            Find Your Next Residence Across America
           </h2>
           <p style={{ fontSize: '1.0625rem', color: '#6B8872', marginBottom: '28px', maxWidth: 520 }}>
-            Premium apartments across Washington's most coveted neighborhoods — vetted by our team, verified for quality.
+            Premium apartments in top US cities, vetted by our team and verified for quality.
           </p>
 
           <form onSubmit={handleSearch} style={{ maxWidth: 640 }}>
