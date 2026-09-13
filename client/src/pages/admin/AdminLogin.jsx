@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { motion } from 'framer-motion';
 import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
@@ -27,99 +26,136 @@ export default function AdminLogin() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--midnight)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'var(--s-6)' }}>
-      <motion.div
-        initial={{ opacity: 0, y: 24, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        style={{ width: '100%', maxWidth: 440 }}
-      >
-        {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: 'var(--s-8)' }}>
-          <svg width="48" height="48" viewBox="0 0 64 64" fill="none" style={{ margin: '0 auto var(--s-3)' }}>
-            <path d="M16 50L32 18L48 50" stroke="#C9A84C" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M22 38H42" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" />
-            <circle cx="32" cy="18" r="3.5" fill="#C9A84C" />
-          </svg>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 600, color: 'var(--white)' }}>Arcadia</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--gold)', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 500, marginTop: 2 }}>Admin Portal</div>
+    <div style={{
+      minHeight: '100vh',
+      background: '#0B1A12',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '24px',
+    }}>
+      {/* Background accent */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(to right, #059669, #34D399, #059669)' }} />
+
+      <div style={{ width: '100%', maxWidth: 420 }}>
+
+        {/* Logo + Brand */}
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <img
+            src="/logo.PNG"
+            alt="Rotex One Realty"
+            style={{ height: 64, width: 'auto', objectFit: 'contain', marginBottom: 16 }}
+            onError={e => { e.currentTarget.style.display = 'none'; }}
+          />
+          <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', letterSpacing: '0.02em' }}>ROTEX ONE REALTY</div>
+          <div style={{ fontSize: '0.6875rem', color: '#059669', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 600, marginTop: 4 }}>Admin Portal</div>
         </div>
 
         {/* Card */}
-        <div style={{ background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 'var(--r-2xl)', padding: 'var(--s-8)' }}>
-          <h2 style={{ color: 'var(--white)', marginBottom: 'var(--s-2)', fontSize: '1.5rem' }}>Sign In</h2>
-          <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.875rem', marginBottom: 'var(--s-8)' }}>Enter your credentials to access the admin dashboard.</p>
+        <div style={{
+          background: 'rgba(255,255,255,0.04)',
+          backdropFilter: 'blur(24px)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 20,
+          padding: 32,
+        }}>
+          <h2 style={{ color: '#fff', marginBottom: 6, fontSize: '1.375rem', fontWeight: 700 }}>Sign In</h2>
+          <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.875rem', marginBottom: 28 }}>
+            Enter your credentials to access the admin dashboard.
+          </p>
 
-          <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--s-5)' }}>
-            <div className="form-group">
-              <label className="form-label" style={{ color: 'rgba(255,255,255,0.7)' }}>Email Address</label>
+          <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+
+            <div>
+              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'rgba(255,255,255,0.65)', marginBottom: 6 }}>
+                Email Address
+              </label>
               <input
                 type="email"
-                className={`form-input ${errors.email ? 'error' : ''}`}
-                placeholder="admin@arcadia.com"
-                style={{ background: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.12)', color: 'var(--white)' }}
+                placeholder="admin@rotexone.com"
+                style={{
+                  width: '100%', padding: '12px 14px', boxSizing: 'border-box',
+                  background: 'rgba(255,255,255,0.06)',
+                  border: `1px solid ${errors.email ? '#F87171' : 'rgba(255,255,255,0.12)'}`,
+                  borderRadius: 10, color: '#fff',
+                  fontSize: '0.9375rem', fontFamily: 'inherit', outline: 'none',
+                  transition: 'border-color 0.15s',
+                }}
+                onFocus={e => e.target.style.borderColor = '#059669'}
+                onBlur={e => e.target.style.borderColor = errors.email ? '#F87171' : 'rgba(255,255,255,0.12)'}
                 {...register('email', { required: 'Email required' })}
               />
-              {errors.email && <span className="form-error">{errors.email.message}</span>}
+              {errors.email && <span style={{ fontSize: '0.75rem', color: '#F87171', marginTop: 4, display: 'block' }}>{errors.email.message}</span>}
             </div>
 
-            <div className="form-group">
-              <label className="form-label" style={{ color: 'rgba(255,255,255,0.7)' }}>Password</label>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.8125rem', fontWeight: 600, color: 'rgba(255,255,255,0.65)', marginBottom: 6 }}>
+                Password
+              </label>
               <div style={{ position: 'relative' }}>
                 <input
                   type={showPw ? 'text' : 'password'}
-                  className={`form-input ${errors.password ? 'error' : ''}`}
                   placeholder="••••••••"
-                  style={{ background: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.12)', color: 'var(--white)', paddingRight: 'var(--s-10)' }}
+                  style={{
+                    width: '100%', padding: '12px 44px 12px 14px', boxSizing: 'border-box',
+                    background: 'rgba(255,255,255,0.06)',
+                    border: `1px solid ${errors.password ? '#F87171' : 'rgba(255,255,255,0.12)'}`,
+                    borderRadius: 10, color: '#fff',
+                    fontSize: '0.9375rem', fontFamily: 'inherit', outline: 'none',
+                    transition: 'border-color 0.15s',
+                  }}
+                  onFocus={e => e.target.style.borderColor = '#059669'}
+                  onBlur={e => e.target.style.borderColor = errors.password ? '#F87171' : 'rgba(255,255,255,0.12)'}
                   {...register('password', { required: 'Password required' })}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPw(!showPw)}
-                  style={{ position: 'absolute', right: 'var(--s-4)', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', display: 'flex' }}
+                  style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'rgba(255,255,255,0.35)', cursor: 'pointer', display: 'flex' }}
                 >
                   {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
-              {errors.password && <span className="form-error">{errors.password.message}</span>}
+              {errors.password && <span style={{ fontSize: '0.75rem', color: '#F87171', marginTop: 4, display: 'block' }}>{errors.password.message}</span>}
             </div>
 
             <button
               type="submit"
               disabled={loading}
               style={{
-                padding: 'var(--s-4)',
-                background: loading ? 'rgba(201,168,76,0.5)' : 'var(--gold)',
-                color: 'var(--midnight)',
-                border: 'none',
-                borderRadius: 'var(--r-xl)',
-                fontWeight: 700,
-                fontSize: '0.9375rem',
+                width: '100%', padding: '13px',
+                background: loading ? 'rgba(5,150,105,0.5)' : '#059669',
+                color: '#fff', border: 'none', borderRadius: 10,
+                fontWeight: 700, fontSize: '0.9375rem',
                 cursor: loading ? 'not-allowed' : 'pointer',
-                transition: 'all var(--t-fast)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 'var(--s-2)',
+                transition: 'background 0.15s',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                marginTop: 4,
               }}
-              onMouseEnter={e => { if (!loading) e.currentTarget.style.background = 'var(--gold-dark)'; }}
-              onMouseLeave={e => { if (!loading) e.currentTarget.style.background = 'var(--gold)'; }}
+              onMouseEnter={e => { if (!loading) e.currentTarget.style.background = '#047857'; }}
+              onMouseLeave={e => { if (!loading) e.currentTarget.style.background = '#059669'; }}
             >
               {loading ? (
-                <><div style={{ width: 16, height: 16, border: '2px solid rgba(0,0,0,0.2)', borderTop: '2px solid var(--midnight)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} /> Signing In...</>
+                <>
+                  <div style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.3)', borderTop: '2px solid #fff', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                  Signing In...
+                </>
               ) : 'Sign In'}
             </button>
           </form>
         </div>
 
-        <p style={{ textAlign: 'center', marginTop: 'var(--s-5)', fontSize: '0.8125rem', color: 'rgba(255,255,255,0.3)' }}>
-          Arcadia Properties &mdash; Admin Portal
+        <p style={{ textAlign: 'center', marginTop: 20, fontSize: '0.8125rem', color: 'rgba(255,255,255,0.25)' }}>
+          Rotex One Realty &mdash; Admin Portal
         </p>
-      </motion.div>
+      </div>
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
-        input:-webkit-autofill { -webkit-box-shadow: 0 0 0 100px rgba(255,255,255,0.06) inset !important; -webkit-text-fill-color: white !important; }
+        input:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0 100px rgba(255,255,255,0.06) inset !important;
+          -webkit-text-fill-color: white !important;
+        }
       `}</style>
     </div>
   );
