@@ -62,7 +62,7 @@ export default function AdminLayout() {
         <img
           src="/logo.PNG"
           alt="Rotex One Realty"
-          style={{ height: 36, width: 36, objectFit: 'contain', borderRadius: 6, flexShrink: 0 }}
+          style={{ height: 56, width: 56, objectFit: 'contain', borderRadius: 6, flexShrink: 0 }}
           onError={e => { e.currentTarget.style.display = 'none'; }}
         />
         {isExpanded && (
