@@ -44,7 +44,7 @@ export default function AdminLogin() {
           <img
             src="/logo.PNG"
             alt="Rotex One Realty"
-            style={{ height: 110, width: 'auto', objectFit: 'contain', marginBottom: 16 }}
+            style={{ height: 180, width: 'auto', objectFit: 'contain', marginBottom: 16 }}
             onError={e => { e.currentTarget.style.display = 'none'; }}
           />
           <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', letterSpacing: '0.02em' }}>ROTEX ONE REALTY</div>

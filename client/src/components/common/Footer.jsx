@@ -78,7 +78,7 @@ export default function Footer() {
               <img
                 src="/logo.PNG"
                 alt="Rotex One Realty"
-                style={{ height: 80, width: 'auto', objectFit: 'contain' }}
+                style={{ height: 140, width: 'auto', objectFit: 'contain' }}
                 onError={e => { e.currentTarget.style.display = 'none'; }}
               />
             </Link>

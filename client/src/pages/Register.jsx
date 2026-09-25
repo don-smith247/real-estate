@@ -63,7 +63,7 @@ export default function Register() {
           <img
             src="/logo.PNG"
             alt="Rotex One Realty"
-            style={{ height: 64, width: 'auto', objectFit: 'contain' }}
+            style={{ height: 110, width: 'auto', objectFit: 'contain' }}
             onError={e => { e.currentTarget.style.display = 'none'; }}
           />
           <div>
