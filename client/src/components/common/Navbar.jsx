@@ -66,7 +66,7 @@ export default function Navbar() {
             <img
               src="/logo.PNG"
               alt="Rotex One Realty"
-              style={{ height: 120, width: 'auto', maxWidth: 340, objectFit: 'contain' }}
+              style={{ height: 48, width: 'auto', maxWidth: 180, objectFit: 'contain' }}
               onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'flex'; }}
             />
             <span style={{ display: 'none', fontWeight: 800, fontSize: '1rem', color: '#059669', letterSpacing: '0.04em', textTransform: 'uppercase', lineHeight: 1 }}>
